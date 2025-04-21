@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Ambulance, Building2, ChevronFirst as FirstAid, Phone } from 'lucide-react-native';
 import { router } from 'expo-router';
+import { useState } from 'react';
 
 const EMERGENCY_SERVICES = [
   {
@@ -30,6 +31,16 @@ const EMERGENCY_SERVICES = [
 ];
 
 export default function EmergencyScreen() {
+
+  const userIdFromLocalStorage = localStorage.getItem("userId");
+
+  const [userId, setUserId] = useState(userIdFromLocalStorage);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userId");
+    router.push("/(auth)/login");
+  }
+
   return (
     <View style={styles.container}>
 
@@ -39,7 +50,12 @@ export default function EmergencyScreen() {
         marginHorizontal: 20,
         justifyContent: 'center',
       }}>
-        <Text style={{ fontSize: 16, fontWeight: '600', color: '#fff', backgroundColor: '#008000', padding: 10, borderRadius: 10   }}  onPress={() => router.push('/(auth)/login')}>Login</Text>
+        {
+          userId ?
+            <Text style={{ fontSize: 16, fontWeight: '600', color: '#fff', backgroundColor: '#008000', padding: 10, borderRadius: 10 }} onPress={() => handleLogout()}>Logout</Text>
+            :
+            <Text style={{ fontSize: 16, fontWeight: '600', color: '#fff', backgroundColor: '#008000', padding: 10, borderRadius: 10 }} onPress={() => router.push('/(auth)/login')}>Login</Text>
+        }
       </View>
 
       <View style={styles.header} >
