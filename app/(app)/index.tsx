@@ -45,22 +45,31 @@ export default function EmergencyScreen() {
     <View style={styles.container}>
 
       <View style={{
-        alignItems: 'flex-end',
-        marginTop: 60,
-        marginHorizontal: 20,
-        justifyContent: 'center',
-      }}>
-        {
-          userId ?
-            <Text style={{ fontSize: 16, fontWeight: '600', color: '#fff', backgroundColor: '#008000', padding: 10, borderRadius: 10 }} onPress={() => handleLogout()}>Logout</Text>
-            :
-            <Text style={{ fontSize: 16, fontWeight: '600', color: '#fff', backgroundColor: '#008000', padding: 10, borderRadius: 10 }} onPress={() => router.push('/(auth)/login')}>Login</Text>
-        }
-      </View>
+          display: 'flex',
+          marginTop: 60,
+          marginHorizontal: 20,
+          justifyContent: 'center',
+        }}>
+        <View style={{
+          alignItems: 'flex-end',
+          marginHorizontal: 20,
+          justifyContent: 'center',
+        }}>
+          {userId &&
+            <p>User ID: {userId}</p>
+          }
+          {
+            userId ?
+              <Text style={{ fontSize: 16, fontWeight: '600', color: '#fff', backgroundColor: '#008000', padding: 10, borderRadius: 10 }} onPress={() => handleLogout()}>Logout</Text>
+              :
+              <Text style={{ fontSize: 16, fontWeight: '600', color: '#fff', backgroundColor: '#008000', padding: 10, borderRadius: 10 }} onPress={() => router.push('/(auth)/login')}>Login</Text>
+          }
+        </View>
 
-      <View style={styles.header} >
-        <Text style={styles.headerTitle}>Emergency Services</Text>
-        <Text style={styles.headerSubtitle}>Quick access to emergency assistance</Text>
+        <View style={styles.header} >
+          <Text style={styles.headerTitle}>Emergency Services</Text>
+          <Text style={styles.headerSubtitle}>Quick access to emergency assistance</Text>
+        </View>
       </View>
 
       <ScrollView style={styles.content}>

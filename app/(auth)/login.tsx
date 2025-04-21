@@ -4,7 +4,16 @@ import { auth, RecaptchaVerifier, signInWithPhoneNumber } from "@/lib/firebase";
 import { router } from 'expo-router';
 
 const PhoneAuth = () => {
-  const [phoneNumber, setPhoneNumber] = useState('9011444465');
+
+  const userIdFromLocalStorage = localStorage.getItem("userId");
+
+  const [userId, setUserId] = useState(userIdFromLocalStorage);
+
+  if (userId) {
+    alert("alreday logged in")
+  }
+
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [confirm, setConfirm] = useState<any>(null);
   const [code, setCode] = useState('');
   const recaptchaVerifierRef = useRef<RecaptchaVerifier | null>(null);
